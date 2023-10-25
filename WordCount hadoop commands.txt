@@ -1,0 +1,24 @@
+192.168.83.145
+$HADOOP_HOME/sbin/start-dfs.sh
+$HADOOP_HOME/sbin/start-yarn.sh
+jps
+
+$HADOOP_HOME/sbin/stop-dfs.sh
+$HADOOP_HOME/sbin/stop-yarn.sh
+
+$cd /home/hdadmin/MapReduceExamples/Wordcount
+~MapReduceExamples/Wordcount$
+hdfs dfs -mkdir /wordcountdata
+hdfs dfs -put /home/hdadmin/MapReduceExamples/Wordcount/sample.txt    /wordcountdata
+
+$HADOOP_HOME/bin/hadoop jar wordcount.jar /wordcountdata /wordcount_output
+
+$hdfs dfs -ls /wordcount_output
+$hdfs dfs -cat /wordcount_output/part-00000
+
+
+OPen main machine's browser and type url
+http://192.168.83.145:50070/dfshealth.html#tab-overview
+
+
+

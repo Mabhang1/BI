@@ -1,0 +1,34 @@
+192.168.76.128
+
+$HADOOP_HOME/bin/hdfs namenode -format
+$HADOOP_HOME/sbin/start-dfs.sh
+$HADOOP_HOME/sbin/start-yarn.sh
+jps
+
+$HADOOP_HOME/sbin/stop-dfs.sh
+$HADOOP_HOME/sbin/stop-yarn.sh
+
+
+$HADOOP_HOME/bin/hdfs dfs -copyFromLocal ~/inputMapReduce  /
+
+$HADOOP_HOME/bin/hdfs dfs -ls /inputMapReduce
+
+$HADOOP_HOME/bin/hdfs dfs -rm /inputMapReduce/sample.txt~
+
+$HADOOP_HOME/bin/hdfs dfs -mkdir
+
+for deleting directory use -rm -r
+
+
+1. WordCount
+$HADOOP_HOME/bin/hadoop jar wordcount.jar /inputMapReduce /mapreduce_wordcount_output
+$HADOOP_HOME/bin/hadoop dfs -cat  /mapreduce_wordcount_output/part-00000
+
+2. Counting No. of Products
+$HADOOP_HOME/bin/hadoop jar ProductSalePerCountry.jar /inputMapReduce /mapreduce_output_sales
+$HADOOP_HOME/bin/hdfs dfs -cat /mapreduce_output_sales/part-00000
+
+
+3. Bill Average
+$HADOOP_HOME/bin/hadoop jar billaverage.jar /inputBill /mapreduce_billaverage_output
+$HADOOP_HOME/bin/hadoop dfs -cat  /mapreduce_billaverage_output/part-00000
